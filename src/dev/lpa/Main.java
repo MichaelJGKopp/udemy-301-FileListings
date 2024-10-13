@@ -43,6 +43,13 @@ public class Main {
     } catch (IOException e) {
       e.printStackTrace();
     }
+
+    System.out.println("===================DIRECTORY STREAM===================");
+    try (var dirs = Files.newDirectoryStream(path)) {
+      dirs.forEach(d -> System.out.println(Main.listDir(d)));
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   private static String listDir(Path path) {
