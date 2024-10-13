@@ -34,8 +34,9 @@ public class Main {
     }
     System.out.println("----------------------------------");
 
-    try (Stream<Path> paths = Files.find(path, 2,
-      (p, attr) -> attr.isRegularFile())) {  // recursive for depth > 1
+    try (Stream<Path> paths = Files.find(path, Integer.MAX_VALUE,
+      (p, attr) -> attr.isRegularFile() && attr.size() > 300
+    )) {  // recursive for depth > 1
       paths
         .map(Main::listDir)
         .forEach(System.out::println);
