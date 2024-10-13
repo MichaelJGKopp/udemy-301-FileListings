@@ -22,6 +22,26 @@ public class Main {
     } catch (IOException e) {
       e.printStackTrace();
     }
+    System.out.println("----------------------------------");
+
+    try (Stream<Path> paths = Files.walk(path, 2)) {  // recursive for depth > 1
+      paths
+        .filter(Files::isRegularFile)
+        .map(Main::listDir)
+        .forEach(System.out::println);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    System.out.println("----------------------------------");
+
+    try (Stream<Path> paths = Files.find(path, 2,
+      (p, attr) -> attr.isRegularFile())) {  // recursive for depth > 1
+      paths
+        .map(Main::listDir)
+        .forEach(System.out::println);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   private static String listDir(Path path) {
