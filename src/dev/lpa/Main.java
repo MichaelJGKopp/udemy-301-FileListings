@@ -60,6 +60,8 @@ public class Main {
       LocalDateTime modDT = LocalDateTime.ofInstant(dateField.toInstant(), ZoneId.systemDefault());
       return "%tD %tT %-5s %12s %s"
         .formatted(modDT, modDT, (isDir ? "<DIR>" : ""), (isDir ? "" : Files.size(path)), path);
+//      return "%1$tD %1$tT %2$-5s %3$12s %4$s" // argument indices
+//        .formatted(modDT, (isDir ? "<DIR>" : ""), (isDir ? "" : Files.size(path)), path);
     } catch (IOException e) {
       System.out.println("Whoops! Something went wrong with " + path);
       return path.toString();
