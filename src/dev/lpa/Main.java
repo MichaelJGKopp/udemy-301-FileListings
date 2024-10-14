@@ -44,8 +44,9 @@ public class Main {
       e.printStackTrace();
     }
 
+    path = path.resolve(".idea");
     System.out.println("===================DIRECTORY STREAM===================");
-    try (var dirs = Files.newDirectoryStream(path)) {
+    try (var dirs = Files.newDirectoryStream(path, "*.xml")) {
       dirs.forEach(d -> System.out.println(Main.listDir(d)));
     } catch (IOException e) {
       throw new RuntimeException(e);
