@@ -51,6 +51,16 @@ public class Main {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
+
+    System.out.println("===================DIRECTORY STREAM===================");
+    try (var dirs = Files.newDirectoryStream(path,
+      p -> p.getFileName().toString().endsWith(".xml")
+        && Files.isRegularFile(p) && Files.size(p) > 1000
+      )) {
+      dirs.forEach(d -> System.out.println(Main.listDir(d)));
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   private static String listDir(Path path) {
